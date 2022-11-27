@@ -9,7 +9,13 @@
 // getEmailDomain("t.mellink@novi.nl") geeft novi.nl
 // getEmailDomain("a.wiersma@outlook.com") geeft outlook.com
 
+function getEmailDomain(mail) {
+    console.log(mail.substring(mail.lastIndexOf("@") + 1))
+}
 
+getEmailDomain("n.eeken@novi-education.nl")
+getEmailDomain("t.mellink@novi.nl")
+getEmailDomain("a.wiersma@outlook.com")
 
 
 /* Opdracht  2 */
@@ -20,7 +26,21 @@
 // typeOfEmail("novi.nlaapjesk@outlook.com") geeft geeft "Extern" <-- deze moet het ook doen!
 // typeOfEmail("a.wiersma@outlook.com") geeft "Extern"
 
+function typeOfEmail(mail) {
+    let sub = mail.substring(mail.lastIndexOf("@") + 1);
+    if (sub.includes("education")){
+        console.log("Student")
+    }else if (sub.includes("novi")){
+        console.log("Medewerker")
+    }else{
+        console.log("Extern")
+    }
+}
 
+typeOfEmail("n.eeken@novi-education.nl")
+typeOfEmail("t.mellink@novi.nl")
+typeOfEmail("novi.nlaapjesk@outlook.com")
+typeOfEmail("a.wiersma@outlook.com")
 
 /* Opdracht  3 */
 // Schrijf een functie genaamd checkEmailValidity, die een emailadres verwacht en checkt of het emailadres valide is. De functie returned true of false, afhankelijk van de uitkomst.
@@ -34,3 +54,36 @@
 // checkEmailValidity("n.eekenanovi.nl") geeft false - want geen @
 // checkEmailValidity("n.eeken@novinl.") geeft false - want de punt mag niet als laatst
 // checkEmailValidity("tessmellink@novi,nl") geeft false - want er staat een komma in
+
+function checkEmailValidity(mail) {
+
+    const last = mail.substring(mail.length - 1);
+
+    let check3 = (last.includes("."));
+    let check1 = (mail.includes(","));
+    let check2 = (mail.includes("@"));
+    let  check = false
+
+    if (check2) {
+        if (check3) {
+            check = false
+            console.log(mail + " heeft een punt")
+        } else if (check1) {
+            check = false
+            console.log(mail + " heeft een comma")
+        } else if (check2) {
+            check = true
+            console.log(mail + " heeft een @ en geen comma of punt")
+        }
+    }else {
+        check = false;
+        console.log(mail + " heeft geen @")
+    }
+    return check
+}
+
+console.log(checkEmailValidity("n.eeken@novi.nl"))
+console.log(checkEmailValidity("tessmellink@novi.nl"))
+console.log(checkEmailValidity("n.eekenanovi.nl"))
+console.log(checkEmailValidity("n.eeken@novinl."))
+console.log(checkEmailValidity("tessmellink@novi,nl"))
